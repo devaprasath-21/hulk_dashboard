@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>HULK – The Incredible Avenger</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Black+Han+Sans&family=Inter:wght@300;400;600;700&display=swap"
+        rel="stylesheet" />
+    <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+
+    <!-- ░░░ SMASH INTRO OVERLAY ░░░ -->
+    <div id="smash-overlay">
+        <canvas id="crack-canvas"></canvas>
+        <div id="hulk-intro-figure">
+            <div id="hulk-sprite">
+                <img src="https://media.giphy.com/media/ckGMHXtECfuZq/giphy.gif" alt="Hulk smashing" id="hulk-intro-gif"
+                    onerror="this.src='https://i.giphy.com/FjOsaw9z4BhrW.gif'" />
+            </div>
+            <div id="smash-text">SMASH!</div>
+            <div id="shockwave"></div>
+        </div>
+        <div id="skip-btn" onclick="skipIntro()">SKIP ›</div>
+    </div>
+
+    <!-- ░░░ ANIMATED BACKGROUND ░░░ -->
+    <canvas id="bg-canvas"></canvas>
+
+    <!-- ░░░ NAVBAR ░░░ -->
+    <nav id="navbar">
+        <div class="nav-logo">
+            <span class="hulk-icon">💪</span>
+            <span>HULK</span>
+        </div>
+        <ul class="nav-links">
+            <li><a href="#hero">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#powers">Powers</a></li>
+            <li><a href="#battles">Battles</a></li>
+            <li><a href="#dashboard">Dashboard</a></li>
+        </ul>
+        <div class="nav-rage" id="rage-bar-wrap">
+            <span>RAGE</span>
+            <div class="rage-bar">
+                <div class="rage-fill" id="rage-fill"></div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ░░░ HERO SECTION ░░░ -->
+    <section id="hero">
+        <div class="hero-bg-glow"></div>
+        <div class="hero-content">
+            <p class="hero-sub">MARVEL AVENGERS</p>
+            <h1 class="hero-title">
+                <span class="t-inc">INCREDIBLE</span><br />
+                <span class="t-hulk">HULK</span>
+            </h1>
+            <p class="hero-tagline">"The Angrier I Get, The Stronger I Become."</p>
+            <div class="hero-stats">
+                <div class="stat-pill"><span class="stat-num" data-target="10">0</span><span class="stat-label">Strength
+                        Class</span></div>
+                <div class="stat-pill"><span class="stat-num" data-target="100">0</span><span class="stat-label">+ Ton
+                        Punch</span></div>
+                <div class="stat-pill"><span class="stat-num" data-target="1962">0</span><span class="stat-label">First
+                        Appeared</span></div>
+            </div>
+            <button class="cta-btn" onclick="document.getElementById('dashboard').scrollIntoView({behavior:'smooth'})">
+                EXPLORE DASHBOARD ↓
+            </button>
+        </div>
+        <div class="hero-hulk-art" id="hero-hulk">
+            <div class="hulk-gif-wrap">
+                <!-- Primary animated Hulk GIF -->
+                <img id="hulk-main-gif" class="hulk-real-gif"
+                    src="https://media.giphy.com/media/ckGMHXtECfuZq/giphy.gif" alt="Incredible Hulk animated"
+                    onerror="this.src='https://i.giphy.com/RgduQOICcu1EY.gif'" />
+                <!-- Green gamma energy ring behind the Hulk -->
+                <div class="gamma-ring"></div>
+                <div class="gamma-ring gamma-ring-2"></div>
+            </div>
+            <div class="hulk-real-shadow"></div>
+            <div class="ground-crack" id="ground-crack"></div>
+        </div>
+    </section>
+
+    <!-- ░░░ ABOUT SECTION ░░░ -->
+    <section id="about" class="section">
+        <div class="section-inner">
+            <h2 class="section-title">ORIGIN STORY</h2>
+            <div class="about-grid">
+                <div class="about-card" data-expand="origin-detail">
+                    <div class="card-icon">☢️</div>
+                    <h3>Gamma Radiation</h3>
+                    <p>Bruce Banner was exposed to an enormous dose of gamma radiation during a bomb test, transforming
+                        him forever.</p>
+                    <button class="reveal-btn">READ MORE</button>
+                    <div class="expandable" id="origin-detail">
+                        <p>Dr. Bruce Banner, a brilliant physicist working for the US Army, shielded teenager Rick Jones
+                            from a gamma bomb explosion. The gamma radiation rewrote Banner's DNA, triggering a
+                            Jekyll-and-Hyde transformation whenever his emotions spike — especially anger.</p>
+                    </div>
+                </div>
+                <div class="about-card" data-expand="banner-detail">
+                    <div class="card-icon">🧬</div>
+                    <h3>Bruce Banner</h3>
+                    <p>One of the greatest scientific minds on Earth — and the unwilling host of the most powerful
+                        Avenger.</p>
+                    <button class="reveal-btn">READ MORE</button>
+                    <div class="expandable" id="banner-detail">
+                        <p>Robert Bruce Banner holds multiple PhDs in nuclear physics, biochemistry, and engineering.
+                            His genius-level intellect rivals Tony Stark. In his Banner form he is able to operate the
+                            Avengers' most advanced technology and formulate cures for gamma-induced mutations.</p>
+                    </div>
+                </div>
+                <div class="about-card" data-expand="avenger-detail">
+                    <div class="card-icon">🛡️</div>
+                    <h3>Founding Avenger</h3>
+                    <p>A core member of the original Avengers alongside Iron Man, Thor, Ant-Man, and Wasp.</p>
+                    <button class="reveal-btn">READ MORE</button>
+                    <div class="expandable" id="avenger-detail">
+                        <p>Hulk was one of the original five Avengers assembled to battle Loki. Despite his troubled
+                            nature, Earth's Mightiest Heroes have repeatedly called on Hulk to stand against
+                            cosmic-level threats — from Thanos to world-ending Celestials.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ░░░ POWERS SECTION ░░░ -->
+    <section id="powers" class="section alt-section">
+        <div class="section-inner">
+            <h2 class="section-title">POWERS & ABILITIES</h2>
+            <div class="powers-list">
+                <div class="power-item" style="--i:0">
+                    <div class="power-bar-wrap">
+                        <span class="power-name">Strength</span>
+                        <div class="power-bar">
+                            <div class="power-fill" data-width="100"></div>
+                        </div>
+                        <span class="power-val">∞</span>
+                    </div>
+                    <p class="power-desc">Limitless — grows with rage. Has moved planets from their orbit.</p>
+                </div>
+                <div class="power-item" style="--i:1">
+                    <div class="power-bar-wrap">
+                        <span class="power-name">Durability</span>
+                        <div class="power-bar">
+                            <div class="power-fill" data-width="98"></div>
+                        </div>
+                        <span class="power-val">98</span>
+                    </div>
+                    <p class="power-desc">Near-invulnerable skin resists nuclear blasts and adamantium.</p>
+                </div>
+                <div class="power-item" style="--i:2">
+                    <div class="power-bar-wrap">
+                        <span class="power-name">Healing Factor</span>
+                        <div class="power-bar">
+                            <div class="power-fill" data-width="95"></div>
+                        </div>
+                        <span class="power-val">95</span>
+                    </div>
+                    <p class="power-desc">Regenerates severed limbs and recovers from death itself.</p>
+                </div>
+                <div class="power-item" style="--i:3">
+                    <div class="power-bar-wrap">
+                        <span class="power-name">Leaping</span>
+                        <div class="power-bar">
+                            <div class="power-fill" data-width="90"></div>
+                        </div>
+                        <span class="power-val">90</span>
+                    </div>
+                    <p class="power-desc">Can reach low-Earth orbit in a single thunderclap leap.</p>
+                </div>
+                <div class="power-item" style="--i:4">
+                    <div class="power-bar-wrap">
+                        <span class="power-name">Thunderclap</span>
+                        <div class="power-bar">
+                            <div class="power-fill" data-width="88"></div>
+                        </div>
+                        <span class="power-val">88</span>
+                    </div>
+                    <p class="power-desc">Clapping hands creates a shockwave that disperses hurricanes.</p>
+                </div>
+                <div class="power-item" style="--i:5">
+                    <div class="power-bar-wrap">
+                        <span class="power-name">Intellect (Prof. Hulk)</span>
+                        <div class="power-bar">
+                            <div class="power-fill" data-width="85"></div>
+                        </div>
+                        <span class="power-val">85</span>
+                    </div>
+                    <p class="power-desc">Professor Hulk merges Banner's mind with Hulk's power.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ░░░ BATTLES SECTION ░░░ -->
+    <section id="battles" class="section">
+        <div class="section-inner">
+            <h2 class="section-title">LEGENDARY BATTLES</h2>
+            <div class="battles-scroll">
+                <div class="battle-card" onclick="openBattle('b1')">
+                    <div class="battle-vs">HULK <span>vs</span> THOR</div>
+                    <p>The epic clash of titans — who wins when rage meets thunder?</p>
+                    <div class="battle-tag">CLICK TO EXPAND</div>
+                </div>
+                <div class="battle-card" onclick="openBattle('b2')">
+                    <div class="battle-vs">HULK <span>vs</span> THANOS</div>
+                    <p>The hardest fight ever — Hulk confronts the Mad Titan bare-handed.</p>
+                    <div class="battle-tag">CLICK TO EXPAND</div>
+                </div>
+                <div class="battle-card" onclick="openBattle('b3')">
+                    <div class="battle-vs">HULK <span>vs</span> ABOMINATION</div>
+                    <p>Gamma vs gamma — the definitive fight between two gamma monsters.</p>
+                    <div class="battle-tag">CLICK TO EXPAND</div>
+                </div>
+                <div class="battle-card" onclick="openBattle('b4')">
+                    <div class="battle-vs">HULK <span>vs</span> IRON MAN</div>
+                    <p>Hulkbuster armor vs pure rage — science vs nature's wrath.</p>
+                    <div class="battle-tag">CLICK TO EXPAND</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Battle Modal -->
+    <div id="battle-modal" class="modal-overlay" onclick="closeBattle(event)">
+        <div class="modal-box">
+            <button class="modal-close" onclick="closeBattle()">✕</button>
+            <div id="modal-content"></div>
+        </div>
+    </div>
+
+    <!-- ░░░ DASHBOARD SECTION ░░░ -->
+    <section id="dashboard" class="section alt-section">
+        <div class="section-inner">
+            <h2 class="section-title">HULK DASHBOARD</h2>
+            <p class="section-desc">Click any card to reveal classified Avengers data</p>
+            <div class="dash-grid">
+                <div class="dash-card" onclick="toggleDash(this)" id="dc-bio">
+                    <div class="dash-icon">🧬</div>
+                    <h3>BIO DATA</h3>
+                    <div class="dash-detail">
+                        <table class="info-table">
+                            <tr>
+                                <td>Real Name</td>
+                                <td>Robert Bruce Banner</td>
+                            </tr>
+                            <tr>
+                                <td>Alias</td>
+                                <td>Hulk, Prof. Hulk, World Breaker</td>
+                            </tr>
+                            <tr>
+                                <td>Height (Hulk)</td>
+                                <td>7 ft – 8 ft (rage scales)</td>
+                            </tr>
+                            <tr>
+                                <td>Weight (Hulk)</td>
+                                <td>1,040 – 1,400 lbs</td>
+                            </tr>
+                            <tr>
+                                <td>Eye Color</td>
+                                <td>Green</td>
+                            </tr>
+                            <tr>
+                                <td>Hair</td>
+                                <td>Black (Banner) / Dark Green</td>
+                            </tr>
+                            <tr>
+                                <td>Citizenship</td>
+                                <td>United States of America</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                <div class="dash-card" onclick="toggleDash(this)" id="dc-stats">
+                    <div class="dash-icon">📊</div>
+                    <h3>COMBAT STATS</h3>
+                    <div class="dash-detail">
+                        <table class="info-table">
+                            <tr>
+                                <td>Fighting Style</td>
+                                <td>Savage Street Fighter</td>
+                            </tr>
+                            <tr>
+                                <td>Max Lift</td>
+                                <td>Effectively Unlimited</td>
+                            </tr>
+                            <tr>
+                                <td>Speed (land)</td>
+                                <td>700+ mph running</td>
+                            </tr>
+                            <tr>
+                                <td>Durability</td>
+                                <td>Class 100+</td>
+                            </tr>
+                            <tr>
+                                <td>Wins vs Thor</td>
+                                <td>8 of 14 encounters</td>
+                            </tr>
+                            <tr>
+                                <td>Threat Level</td>
+                                <td>Omega (Gamma)</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                <div class="dash-card" onclick="toggleDash(this)" id="dc-forms">
+                    <div class="dash-icon">🔄</div>
+                    <h3>HULK FORMS</h3>
+                    <div class="dash-detail">
+                        <ul class="info-list">
+                            <li>🟢 <strong>Savage Hulk</strong> — Pure rage, child-like mind</li>
+                            <li>🧠 <strong>Professor Hulk</strong> — Banner's intelligence + full Hulk power</li>
+                            <li>⚫ <strong>Grey Hulk (Joe Fixit)</strong> — Cunning mob enforcer version</li>
+                            <li>🌍 <strong>World Breaker Hulk</strong> — Planet-shattering power level</li>
+                            <li>🔴 <strong>Red Hulk</strong> — Thaddeus Ross, heat-based powers</li>
+                            <li>⚡ <strong>Maestro</strong> — Future dark Hulk, nuclear-enhanced</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="dash-card" onclick="toggleDash(this)" id="dc-allies">
+                    <div class="dash-icon">🤝</div>
+                    <h3>ALLIES & ENEMIES</h3>
+                    <div class="dash-detail">
+                        <div class="ally-cols">
+                            <div>
+                                <strong>ALLIES</strong>
+                                <ul class="info-list">
+                                    <li>Iron Man</li>
+                                    <li>Captain America</li>
+                                    <li>Thor</li>
+                                    <li>Wolverine</li>
+                                    <li>Rick Jones</li>
+                                    <li>Betty Ross</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <strong>ENEMIES</strong>
+                                <ul class="info-list">
+                                    <li>Abomination</li>
+                                    <li>Leader</li>
+                                    <li>Thanos</li>
+                                    <li>General Ross</li>
+                                    <li>Maestro</li>
+                                    <li>MODOK</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="dash-card" onclick="toggleDash(this)" id="dc-gamma">
+                    <div class="dash-icon">☢️</div>
+                    <h3>GAMMA SCIENCE</h3>
+                    <div class="dash-detail">
+                        <p>Exposure Type: <strong>Cobalt-powered Gamma Bomb</strong></p>
+                        <p>Radiation Class: <strong>Gammatron Radiation</strong></p>
+                        <p>DNA Alteration: <strong>Complete Somatic Reconstruction</strong></p>
+                        <p>Trigger: <strong>Adrenaline spike / strong emotion</strong></p>
+                        <p>Energy Output: <strong>Can exceed nuclear benchmarks at peak rage</strong></p>
+                        <p>Dr. Banner's research into gamma radiation led him to attempt to recreate the Super Soldier
+                            serum — resulting in arguably the most powerful accident in Marvel history.</p>
+                    </div>
+                </div>
+                <div class="dash-card" onclick="toggleDash(this)" id="dc-movie">
+                    <div class="dash-icon">🎬</div>
+                    <h3>MCU TIMELINE</h3>
+                    <div class="dash-detail">
+                        <ul class="info-list timeline-list">
+                            <li><span>2008</span> The Incredible Hulk</li>
+                            <li><span>2012</span> The Avengers</li>
+                            <li><span>2013</span> Iron Man 3 (post-credits)</li>
+                            <li><span>2017</span> Thor: Ragnarok</li>
+                            <li><span>2018</span> Avengers: Infinity War</li>
+                            <li><span>2019</span> Avengers: Endgame (Prof. Hulk)</li>
+                            <li><span>2022</span> She-Hulk: Attorney at Law</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ░░░ FOOTER ░░░ -->
+    <footer class="site-footer">
+        <div class="footer-hulk-fist">✊</div>
+        <p class="footer-title">HULK SMASH</p>
+        <p class="footer-sub">Marvel Universe · Avengers Initiative · Built with Gamma Energy</p>
+        <p class="footer-copy">© 2026 – The Incredible Hulk Fan Dashboard</p>
+    </footer>
+
+    <script src="app.js"></script>
+</body>
+
+</html>

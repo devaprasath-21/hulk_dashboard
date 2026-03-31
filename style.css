@@ -1,0 +1,1135 @@
+/* ================================================================
+   HULK AVENGERS PAGE – style.css
+   ================================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Black+Han+Sans&family=Inter:wght@300;400;600;700&display=swap');
+
+/* ---- RESET & ROOT ---- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --green-1: #00ff41;
+  --green-2: #39d353;
+  --green-3: #1a7a1a;
+  --green-4: #0a3d0a;
+  --green-5: #052005;
+  --gamma: #7dff4f;
+  --gold: #ffd700;
+  --dark: #040d04;
+  --glass-bg: rgba(10, 40, 10, 0.55);
+  --glass-border: rgba(0, 255, 65, 0.22);
+  --font-hulk: 'Bebas Neue', sans-serif;
+  --font-body: 'Inter', sans-serif;
+  --radius: 14px;
+  --shadow-green: 0 0 30px rgba(0, 255, 65, 0.35);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--dark);
+  color: #d4f5d4;
+  font-family: var(--font-body);
+  overflow-x: hidden;
+  min-height: 100vh;
+}
+
+/* ---- BACKGROUND CANVAS ---- */
+#bg-canvas {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* ================================================================
+   SMASH INTRO OVERLAY
+   ================================================================ */
+#smash-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  background: #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.6s ease, transform 0.6s ease;
+  overflow: hidden;
+}
+
+#smash-overlay.hide {
+  opacity: 0;
+  pointer-events: none;
+  transform: scale(1.05);
+}
+
+#crack-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+#hulk-intro-figure {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: 2;
+}
+
+/* Real Hulk GIF for Intro */
+#hulk-sprite {
+  width: 300px;
+  height: 320px;
+  position: relative;
+  animation: introFloat 2s ease-in-out infinite;
+  filter: drop-shadow(0 0 40px #00ff41) drop-shadow(0 0 80px rgba(0, 255, 65, .5));
+}
+
+#hulk-intro-gif {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  border-radius: 20px;
+}
+
+@keyframes introFloat {
+
+  0%,
+  100% {
+    transform: translateY(0) scale(1);
+  }
+
+  50% {
+    transform: translateY(-20px) scale(1.04);
+  }
+}
+
+#smash-text {
+  font-family: var(--font-hulk);
+  font-size: clamp(80px, 15vw, 180px);
+  color: var(--green-1);
+  text-shadow: 0 0 40px var(--green-1), 0 0 80px #39d353, 6px 6px 0 #052005;
+  letter-spacing: 12px;
+  animation: smashPulse 0.4s ease-in-out infinite alternate;
+  opacity: 0;
+  margin-top: -20px;
+}
+
+@keyframes smashPulse {
+  from {
+    transform: scale(1) skewX(-2deg);
+  }
+
+  to {
+    transform: scale(1.06) skewX(2deg);
+  }
+}
+
+#shockwave {
+  position: absolute;
+  bottom: -60px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 4px solid var(--green-1);
+  opacity: 0;
+}
+
+#skip-btn {
+  position: fixed;
+  bottom: 32px;
+  right: 32px;
+  font-family: var(--font-hulk);
+  font-size: 18px;
+  letter-spacing: 3px;
+  color: var(--green-2);
+  border: 2px solid var(--green-2);
+  padding: 10px 24px;
+  border-radius: 40px;
+  cursor: pointer;
+  z-index: 10001;
+  transition: all .25s;
+  backdrop-filter: blur(6px);
+  background: rgba(0, 0, 0, .4);
+}
+
+#skip-btn:hover {
+  background: var(--green-2);
+  color: #000;
+}
+
+/* ================================================================
+   NAVBAR
+   ================================================================ */
+#navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 999;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 40px;
+  background: rgba(4, 13, 4, 0.8);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--glass-border);
+  transition: all .3s;
+}
+
+.nav-logo {
+  font-family: var(--font-hulk);
+  font-size: 32px;
+  letter-spacing: 6px;
+  color: var(--green-1);
+  text-shadow: 0 0 20px var(--green-1);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.hulk-icon {
+  font-size: 28px;
+  animation: iconPulse 2s infinite;
+}
+
+@keyframes iconPulse {
+
+  0%,
+  100% {
+    transform: scale(1)
+  }
+
+  50% {
+    transform: scale(1.2)
+  }
+}
+
+.nav-links {
+  display: flex;
+  gap: 32px;
+  list-style: none;
+}
+
+.nav-links a {
+  font-family: var(--font-hulk);
+  font-size: 16px;
+  letter-spacing: 2px;
+  color: #88cc88;
+  text-decoration: none;
+  transition: color .2s, text-shadow .2s;
+}
+
+.nav-links a:hover {
+  color: var(--green-1);
+  text-shadow: 0 0 12px var(--green-1);
+}
+
+.nav-rage {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-hulk);
+  font-size: 13px;
+  color: var(--green-2);
+  letter-spacing: 3px;
+}
+
+.rage-bar {
+  width: 100px;
+  height: 8px;
+  background: rgba(0, 255, 65, .15);
+  border-radius: 4px;
+  overflow: hidden;
+  border: 1px solid var(--glass-border);
+}
+
+.rage-fill {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, var(--green-3), var(--green-1));
+  border-radius: 4px;
+  transition: width 1s ease;
+  box-shadow: 0 0 10px var(--green-1);
+}
+
+/* ================================================================
+   HERO SECTION
+   ================================================================ */
+#hero {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 120px 8% 60px;
+  position: relative;
+  z-index: 1;
+  overflow: hidden;
+}
+
+.hero-bg-glow {
+  position: absolute;
+  top: 50%;
+  left: 40%;
+  transform: translate(-50%, -50%);
+  width: 800px;
+  height: 800px;
+  background: radial-gradient(circle, rgba(0, 255, 65, .12) 0%, transparent 70%);
+  border-radius: 50%;
+  pointer-events: none;
+  animation: glowPulse 4s ease-in-out infinite;
+}
+
+@keyframes glowPulse {
+
+  0%,
+  100% {
+    opacity: .7;
+    transform: translate(-50%, -50%) scale(1)
+  }
+
+  50% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1.15)
+  }
+}
+
+.hero-content {
+  max-width: 560px;
+  z-index: 2;
+}
+
+.hero-sub {
+  font-family: var(--font-hulk);
+  letter-spacing: 8px;
+  font-size: 14px;
+  color: var(--green-2);
+  margin-bottom: 10px;
+  opacity: .8;
+}
+
+.hero-title {
+  line-height: .9;
+  margin-bottom: 20px;
+}
+
+.t-inc {
+  font-family: var(--font-hulk);
+  font-size: clamp(40px, 6vw, 80px);
+  letter-spacing: 14px;
+  color: #7dff4f;
+  display: block;
+  text-shadow: 0 0 30px rgba(125, 255, 79, .5);
+}
+
+.t-hulk {
+  font-family: 'Black Han Sans', sans-serif;
+  font-size: clamp(100px, 18vw, 220px);
+  letter-spacing: -4px;
+  color: var(--green-1);
+  text-shadow:
+    0 0 20px var(--green-1),
+    0 0 60px rgba(0, 255, 65, .6),
+    6px 6px 0 var(--green-4),
+    12px 12px 0 rgba(0, 80, 0, .5);
+  display: block;
+  animation: hulkTitlePulse 3s ease-in-out infinite;
+}
+
+@keyframes hulkTitlePulse {
+
+  0%,
+  100% {
+    text-shadow: 0 0 20px var(--green-1), 0 0 60px rgba(0, 255, 65, .6), 6px 6px 0 var(--green-4), 12px 12px 0 rgba(0, 80, 0, .5);
+  }
+
+  50% {
+    text-shadow: 0 0 40px var(--green-1), 0 0 100px rgba(0, 255, 65, .9), 6px 6px 0 var(--green-4), 12px 12px 0 rgba(0, 80, 0, .5);
+  }
+}
+
+.hero-tagline {
+  font-size: 16px;
+  font-style: italic;
+  color: #88cc88;
+  margin-bottom: 36px;
+  border-left: 3px solid var(--green-2);
+  padding-left: 16px;
+}
+
+.hero-stats {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  margin-bottom: 40px;
+}
+
+.stat-pill {
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: 50px;
+  padding: 12px 22px;
+  text-align: center;
+  backdrop-filter: blur(10px);
+  min-width: 110px;
+}
+
+.stat-num {
+  display: block;
+  font-family: var(--font-hulk);
+  font-size: 32px;
+  color: var(--green-1);
+  text-shadow: 0 0 12px var(--green-1);
+}
+
+.stat-label {
+  display: block;
+  font-size: 10px;
+  letter-spacing: 2px;
+  color: #7daa7d;
+  text-transform: uppercase;
+  margin-top: 2px;
+}
+
+.cta-btn {
+  font-family: var(--font-hulk);
+  font-size: 18px;
+  letter-spacing: 4px;
+  padding: 16px 48px;
+  background: linear-gradient(135deg, var(--green-3), var(--green-2));
+  color: #040d04;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: all .3s;
+  box-shadow: 0 0 30px rgba(0, 255, 65, .3);
+}
+
+.cta-btn:hover {
+  transform: translateY(-4px) scale(1.04);
+  box-shadow: 0 0 50px rgba(0, 255, 65, .6);
+}
+
+/* ---- Real Hulk GIF styles ---- */
+.hero-hulk-art {
+  position: relative;
+  z-index: 2;
+  flex-shrink: 0;
+  animation: heroFloat 3s ease-in-out infinite, hulkEntrance 1.2s cubic-bezier(.175, .885, .32, 1.275) both;
+}
+
+@keyframes hulkEntrance {
+  0% {
+    opacity: 0;
+    transform: translateY(80px) scale(.8);
+  }
+
+  60% {
+    opacity: 1;
+    transform: translateY(-10px) scale(1.05);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes heroFloat {
+
+  0%,
+  100% {
+    transform: translateY(0)
+  }
+
+  50% {
+    transform: translateY(-18px)
+  }
+}
+
+/* GIF wrapper — holds the image + gamma rings as a stack */
+.hulk-gif-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 420px;
+  height: 480px;
+}
+
+.hulk-real-gif {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  position: relative;
+  z-index: 2;
+  filter:
+    drop-shadow(0 0 30px #00ff41) drop-shadow(0 0 70px rgba(0, 255, 65, .5)) drop-shadow(0 0 120px rgba(0, 255, 65, .25));
+  border-radius: 8px;
+  animation: gifGlowPulse 2.5s ease-in-out infinite;
+}
+
+@keyframes gifGlowPulse {
+
+  0%,
+  100% {
+    filter: drop-shadow(0 0 30px #00ff41) drop-shadow(0 0 70px rgba(0, 255, 65, .5)) drop-shadow(0 0 120px rgba(0, 255, 65, .25));
+  }
+
+  50% {
+    filter: drop-shadow(0 0 50px #00ff41) drop-shadow(0 0 110px rgba(0, 255, 65, .8)) drop-shadow(0 0 180px rgba(0, 255, 65, .4));
+  }
+}
+
+/* Gamma energy rings */
+.gamma-ring {
+  position: absolute;
+  inset: 10%;
+  border-radius: 50%;
+  border: 2px solid rgba(0, 255, 65, .3);
+  z-index: 1;
+  animation: gammaRingSpin 6s linear infinite;
+  pointer-events: none;
+}
+
+.gamma-ring-2 {
+  inset: 0;
+  border-color: rgba(0, 255, 65, .15);
+  border-width: 3px;
+  animation-duration: 10s;
+  animation-direction: reverse;
+  border-style: dashed;
+}
+
+@keyframes gammaRingSpin {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Ground glow shadow under the gif */
+.hulk-real-shadow {
+  width: 360px;
+  height: 40px;
+  background: radial-gradient(ellipse, rgba(0, 255, 65, .4) 0%, transparent 70%);
+  border-radius: 50%;
+  margin-top: -20px;
+  animation: shadowPulse 2.5s ease-in-out infinite;
+}
+
+@keyframes shadowPulse {
+
+  0%,
+  100% {
+    transform: scaleX(1);
+    opacity: .6;
+  }
+
+  50% {
+    transform: scaleX(1.15);
+    opacity: 1;
+  }
+}
+
+
+.ground-crack {
+  width: 340px;
+  height: 4px;
+  position: relative;
+  margin-top: -8px;
+}
+
+.ground-crack::before,
+.ground-crack::after {
+  content: '';
+  position: absolute;
+  background: var(--green-1);
+  border-radius: 2px;
+  box-shadow: 0 0 10px var(--green-1);
+}
+
+.ground-crack::before {
+  width: 100%;
+  height: 2px;
+  top: 0;
+  left: 0;
+}
+
+.ground-crack::after {
+  width: 60%;
+  height: 2px;
+  top: 6px;
+  left: 20%;
+  transform: rotate(-3deg);
+}
+
+/* ================================================================
+   SECTIONS
+   ================================================================ */
+.section {
+  padding: 100px 8%;
+  position: relative;
+  z-index: 1;
+}
+
+.alt-section {
+  background: rgba(0, 255, 65, 0.03);
+}
+
+.section-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.section-title {
+  font-family: 'Black Han Sans', sans-serif;
+  font-size: clamp(48px, 8vw, 90px);
+  color: var(--green-1);
+  text-shadow: 0 0 30px rgba(0, 255, 65, .5), 4px 4px 0 var(--green-4);
+  letter-spacing: 4px;
+  margin-bottom: 60px;
+  position: relative;
+}
+
+.section-title::after {
+  content: '';
+  display: block;
+  width: 80px;
+  height: 4px;
+  background: linear-gradient(90deg, var(--green-1), transparent);
+  margin-top: 12px;
+  border-radius: 2px;
+}
+
+.section-desc {
+  color: #88cc88;
+  margin-top: -40px;
+  margin-bottom: 46px;
+  font-size: 15px;
+}
+
+/* ================================================================
+   ABOUT CARDS
+   ================================================================ */
+.about-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 28px;
+}
+
+.about-card {
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius);
+  padding: 32px;
+  backdrop-filter: blur(14px);
+  transition: transform .3s, box-shadow .3s;
+  position: relative;
+  overflow: hidden;
+}
+
+.about-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(0, 255, 65, .05), transparent);
+  pointer-events: none;
+}
+
+.about-card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-green);
+}
+
+.card-icon {
+  font-size: 36px;
+  margin-bottom: 16px;
+}
+
+.about-card h3 {
+  font-family: var(--font-hulk);
+  font-size: 24px;
+  letter-spacing: 3px;
+  color: var(--green-1);
+  margin-bottom: 10px;
+}
+
+.about-card>p {
+  color: #88cc88;
+  font-size: 14px;
+  line-height: 1.7;
+  margin-bottom: 20px;
+}
+
+.reveal-btn {
+  font-family: var(--font-hulk);
+  font-size: 13px;
+  letter-spacing: 2px;
+  padding: 8px 20px;
+  background: transparent;
+  border: 1px solid var(--green-2);
+  color: var(--green-2);
+  border-radius: 40px;
+  cursor: pointer;
+  transition: all .25s;
+}
+
+.reveal-btn:hover {
+  background: var(--green-2);
+  color: #000;
+}
+
+.expandable {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height .5s ease, padding .3s ease;
+  color: #aaddaa;
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+.expandable.open {
+  max-height: 300px;
+  padding-top: 16px;
+}
+
+/* ================================================================
+   POWERS SECTION
+   ================================================================ */
+.powers-list {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+.power-item {
+  opacity: 0;
+  transform: translateX(-40px);
+  transition: opacity .6s ease calc(var(--i) * 0.1s), transform .6s ease calc(var(--i) * 0.1s);
+}
+
+.power-item.visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.power-bar-wrap {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 6px;
+}
+
+.power-name {
+  font-family: var(--font-hulk);
+  font-size: 18px;
+  letter-spacing: 2px;
+  color: var(--gamma);
+  min-width: 200px;
+}
+
+.power-bar {
+  flex: 1;
+  height: 10px;
+  background: rgba(0, 255, 65, .1);
+  border-radius: 6px;
+  overflow: hidden;
+  border: 1px solid var(--glass-border);
+}
+
+.power-fill {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, var(--green-3), var(--green-1));
+  border-radius: 6px;
+  box-shadow: 0 0 12px var(--green-1);
+  transition: width 1.5s ease;
+}
+
+.power-val {
+  font-family: var(--font-hulk);
+  font-size: 20px;
+  color: var(--green-1);
+  min-width: 36px;
+  text-align: right;
+}
+
+.power-desc {
+  color: #7daa7d;
+  font-size: 13px;
+  padding-left: 0;
+}
+
+/* ================================================================
+   BATTLES
+   ================================================================ */
+.battles-scroll {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 24px;
+}
+
+.battle-card {
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius);
+  padding: 32px 28px;
+  cursor: pointer;
+  transition: all .3s;
+  backdrop-filter: blur(12px);
+  position: relative;
+  overflow: hidden;
+}
+
+.battle-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(0, 255, 65, .07), transparent 60%);
+  pointer-events: none;
+}
+
+.battle-card:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 0 40px rgba(0, 255, 65, .4);
+}
+
+.battle-vs {
+  font-family: 'Black Han Sans', sans-serif;
+  font-size: 28px;
+  color: var(--green-1);
+  margin-bottom: 10px;
+  text-shadow: 0 0 15px rgba(0, 255, 65, .5);
+}
+
+.battle-vs span {
+  color: var(--gold);
+  font-size: 18px;
+}
+
+.battle-card p {
+  color: #88cc88;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.battle-tag {
+  font-family: var(--font-hulk);
+  font-size: 11px;
+  letter-spacing: 3px;
+  color: var(--green-3);
+  margin-top: 18px;
+}
+
+/* ---- BATTLE MODAL ---- */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 5000;
+  background: rgba(0, 0, 0, .8);
+  backdrop-filter: blur(8px);
+  display: none;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-overlay.open {
+  display: flex;
+}
+
+.modal-box {
+  background: linear-gradient(135deg, #071407, #0a2a0a);
+  border: 1px solid var(--green-2);
+  border-radius: 20px;
+  padding: 48px;
+  max-width: 620px;
+  width: 90%;
+  position: relative;
+  box-shadow: 0 0 60px rgba(0, 255, 65, .35);
+  animation: modalIn .4s cubic-bezier(.175, .885, .32, 1.275);
+}
+
+@keyframes modalIn {
+  from {
+    transform: scale(.85) translateY(30px);
+    opacity: 0
+  }
+
+  to {
+    transform: scale(1) translateY(0);
+    opacity: 1
+  }
+}
+
+.modal-close {
+  position: absolute;
+  top: 16px;
+  right: 20px;
+  background: transparent;
+  border: none;
+  color: var(--green-2);
+  font-size: 22px;
+  cursor: pointer;
+  transition: color .2s;
+}
+
+.modal-close:hover {
+  color: var(--green-1);
+}
+
+.modal-box h2 {
+  font-family: var(--font-hulk);
+  font-size: 36px;
+  color: var(--green-1);
+  letter-spacing: 4px;
+  margin-bottom: 20px;
+  text-shadow: 0 0 20px var(--green-1);
+}
+
+.modal-box p {
+  color: #88cc88;
+  font-size: 14px;
+  line-height: 1.75;
+  margin-bottom: 12px;
+}
+
+.modal-box .modal-verdict {
+  font-family: var(--font-hulk);
+  font-size: 22px;
+  color: var(--gold);
+  letter-spacing: 3px;
+  margin-top: 20px;
+}
+
+/* ================================================================
+   DASHBOARD
+   ================================================================ */
+.dash-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 24px;
+}
+
+.dash-card {
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius);
+  padding: 28px;
+  cursor: pointer;
+  backdrop-filter: blur(14px);
+  transition: all .35s;
+  position: relative;
+  overflow: hidden;
+}
+
+.dash-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at top left, rgba(0, 255, 65, .08), transparent 60%);
+}
+
+.dash-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 0 35px rgba(0, 255, 65, .3);
+}
+
+.dash-card.active {
+  border-color: var(--green-1);
+  box-shadow: 0 0 40px rgba(0, 255, 65, .4);
+}
+
+.dash-icon {
+  font-size: 32px;
+  margin-bottom: 12px;
+}
+
+.dash-card h3 {
+  font-family: var(--font-hulk);
+  font-size: 22px;
+  letter-spacing: 3px;
+  color: var(--green-1);
+  margin-bottom: 14px;
+}
+
+.dash-detail {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height .5s ease;
+}
+
+.dash-card.active .dash-detail {
+  max-height: 600px;
+}
+
+.info-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+
+.info-table td {
+  padding: 7px 10px;
+  border-bottom: 1px solid rgba(0, 255, 65, .1);
+  color: #88cc88;
+}
+
+.info-table td:first-child {
+  color: var(--gamma);
+  font-weight: 600;
+  width: 44%;
+}
+
+.info-list {
+  list-style: none;
+  font-size: 13px;
+  color: #88cc88;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.info-list li {
+  padding: 4px 0;
+  border-bottom: 1px solid rgba(0, 255, 65, .08);
+}
+
+.info-list li strong {
+  color: var(--gamma);
+}
+
+.ally-cols {
+  display: flex;
+  gap: 30px;
+  font-size: 13px;
+  color: #88cc88;
+}
+
+.ally-cols strong {
+  display: block;
+  color: var(--gamma);
+  margin-bottom: 8px;
+  font-size: 12px;
+  letter-spacing: 2px;
+}
+
+.timeline-list li span {
+  color: var(--gold);
+  margin-right: 10px;
+  font-weight: 700;
+}
+
+/* ================================================================
+   FOOTER
+   ================================================================ */
+.site-footer {
+  text-align: center;
+  padding: 60px 20px 40px;
+  position: relative;
+  z-index: 1;
+  border-top: 1px solid var(--glass-border);
+}
+
+.footer-hulk-fist {
+  font-size: 56px;
+  animation: fistShake 2s ease-in-out infinite;
+  margin-bottom: 12px;
+}
+
+@keyframes fistShake {
+
+  0%,
+  100% {
+    transform: rotate(-5deg)
+  }
+
+  50% {
+    transform: rotate(5deg) scale(1.1)
+  }
+}
+
+.footer-title {
+  font-family: 'Black Han Sans', sans-serif;
+  font-size: 48px;
+  color: var(--green-1);
+  text-shadow: 0 0 20px var(--green-1);
+  letter-spacing: 6px;
+}
+
+.footer-sub {
+  color: #527a52;
+  font-size: 12px;
+  letter-spacing: 3px;
+  margin-top: 8px;
+}
+
+.footer-copy {
+  color: #2a4a2a;
+  font-size: 11px;
+  margin-top: 16px;
+}
+
+/* ================================================================
+   SCROLLBAR
+   ================================================================ */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #040d04;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--green-3);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--green-1);
+}
+
+/* ================================================================
+   RESPONSIVE
+   ================================================================ */
+@media (max-width: 900px) {
+  #hero {
+    flex-direction: column;
+    text-align: center;
+    padding-top: 140px;
+    gap: 40px;
+  }
+
+  .hero-hulk-art {
+    margin: 0 auto;
+  }
+
+  .hero-stats {
+    justify-content: center;
+  }
+
+  .nav-links {
+    display: none;
+  }
+
+  .hulk-arm {
+    display: none;
+  }
+}
